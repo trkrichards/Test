@@ -1,0 +1,26 @@
+{
+  "employee": "Kelly",
+  "weekOf": "2026-09-09",
+  "ooo": "None",
+  "signedOff": false,
+  "updates": {
+    "ck-unified-vision": "",
+    "ckn-unified-vision": "",
+    "ck-physician-bau": "",
+    "ck-ai-bau": "",
+    "cpck-bau": "",
+    "ck-medical-schools-bau": "",
+    "ck-test-prep-bau": "",
+    "neoid-lms-ck-student": "",
+    "clh": "",
+    "ck-student-noam-clinical-cases-bau": "",
+    "ck-nursing-bau": "",
+    "patient-pass-pe-products-bau": "",
+    "clinical-elearning-bau": "",
+    "clinicalpath-bau": "",
+    "clinicalpath-provider-reports": "",
+    "pss-bau": "",
+    "elearning-localization": ""
+  },
+  "savedAt": "2026-09-09T00:00:00.000Z"
+}

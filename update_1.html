@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Submit Your Weekly Update — Commercial Readiness</title>
+<link rel="stylesheet" href="assets/brand.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <img src="assets/logo-graphite.svg" alt="Elsevier">
+    <nav><a href="index.html">View combined report</a></nav>
+  </div>
+
+  <h1 class="title">Submit your weekly update</h1>
+  <p class="subtitle">Commercial Readiness — Weekly Status Report</p>
+  <hr class="hr-orange">
+
+  <div class="note">
+    Pull from your Outlook email and calendar, Teams chats, prior status reports,
+    and meeting notes from the past 7 days. For each project you touched this
+    week, write 1&ndash;4 sentences in third person, starting with your name
+    (e.g. &ldquo;Barry finalized&hellip;&rdquo;). State what you did and the
+    current status &mdash; no filler, no speculation. Leave any project blank
+    if you have nothing to report. Submitting adds your entry to this week's
+    shared report &mdash; it does not overwrite anyone else's.
+  </div>
+
+  <div class="top-controls">
+    <div class="field">
+      <label for="employee"><strong>Your name</strong></label>
+      <select id="employee">
+        <option value="">Select&hellip;</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="weekOf"><strong>Week of</strong></label>
+      <input type="date" id="weekOf">
+    </div>
+    <div class="field">
+      <button class="btn secondary" id="loadBtn" type="button">Load my entry for this week</button>
+    </div>
+  </div>
+  <p class="status-line" id="loadStatus"></p>
+
+  <form id="updateForm"></form>
+
+  <div class="field">
+    <label for="ooo"><strong>Upcoming out of office</strong></label>
+    <label class="hint">Any planned time out in the next 1&ndash;2 weeks. Enter &ldquo;None&rdquo; if not applicable.</label>
+    <input type="text" id="ooo" placeholder="None">
+  </div>
+
+  <div class="checkbox-row">
+    <input type="checkbox" id="signOff">
+    <label for="signOff">I confirm the updates above are accurate and complete for this week.</label>
+  </div>
+
+  <div class="actions">
+    <button class="btn" id="submitBtn" type="button">Submit to shared report</button>
+    <button class="btn secondary" id="downloadBtn" type="button">Download a local backup copy</button>
+  </div>
+  <p class="status-line" id="saveStatus"></p>
+
+  <div class="note">
+    <strong>How this works:</strong> your update is written to the
+    <code>weeklyReports/&lt;week-of&gt;</code> record in Firestore, alongside
+    (not overwriting) anyone else's entry for the same week. A permanent,
+    read-only copy of every submission is also kept in that week's history
+    log. The combined report on <a href="index.html">index.html</a> reads
+    directly from Firestore, so it updates as soon as you submit &mdash;
+    no commits or redeploys needed. The local backup download is just a
+    safety copy in case of a connection issue.
+  </div>
+
+  <footer class="page-footer">
+    <span>Commercial Readiness &mdash; Weekly Status Report</span>
+    <span>Update form</span>
+  </footer>
+</div>
+
+<script src="assets/projects.js"></script>
+<script type="module">
+  import { submitEntry, getWeek } from "./assets/firebase.js";
+
+  const empSelect = document.getElementById("employee");
+  SUBMITTING_EMPLOYEES.forEach(function(name){
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    empSelect.appendChild(opt);
+  });
+
+  // default "week of" to the most recent Wednesday (report cadence)
+  (function(){
+    const d = new Date();
+    const day = d.getDay(); // 0 Sun .. 6 Sat
+    const diff = (day - 3 + 7) % 7; // 3 = Wednesday
+    d.setDate(d.getDate() - diff);
+    document.getElementById("weekOf").value = d.toISOString().slice(0,10);
+  })();
+
+  const form = document.getElementById("updateForm");
+
+  function renderForm(){
+    form.innerHTML = "";
+    GROUPS.forEach(function(group){
+      const band = document.createElement("div");
+      band.className = "section-band";
+      band.textContent = group.title;
+      form.appendChild(band);
+
+      group.items.forEach(function(item){
+        const wrap = document.createElement("div");
+        wrap.className = "field";
+        wrap.innerHTML =
+          '<label for="f-' + item.id + '"><strong>' + item.name + '</strong></label>' +
+          '<label class="hint">' + PROMPT_HINT + '</label>' +
+          '<textarea id="f-' + item.id + '" data-item="' + item.id + '" placeholder="No updates this week"></textarea>';
+        form.appendChild(wrap);
+      });
+    });
+  }
+  renderForm();
+
+  function currentEmployee(){ return empSelect.value; }
+  function employeeKey(name){ return name.toLowerCase().replace(/[^a-z0-9]+/g, ""); }
+
+  function collect(){
+    const updates = {};
+    ALL_ITEMS.forEach(function(item){
+      const el = document.getElementById("f-" + item.id);
+      updates[item.id] = el ? el.value.trim() : "";
+    });
+    return {
+      employee: currentEmployee(),
+      updates: updates,
+      ooo: document.getElementById("ooo").value.trim() || "None",
+      signedOff: document.getElementById("signOff").checked,
+      savedAt: new Date().toISOString()
+    };
+  }
+
+  function populate(data){
+    document.getElementById("ooo").value = data.ooo && data.ooo !== "None" ? data.ooo : "";
+    document.getElementById("signOff").checked = !!data.signedOff;
+    ALL_ITEMS.forEach(function(item){
+      const el = document.getElementById("f-" + item.id);
+      if (el && data.updates) el.value = data.updates[item.id] || "";
+    });
+  }
+
+  document.getElementById("loadBtn").addEventListener("click", function(){
+    const name = currentEmployee();
+    const weekOf = document.getElementById("weekOf").value;
+    const statusEl = document.getElementById("loadStatus");
+    if (!name){ statusEl.textContent = "Select your name first."; statusEl.className = "status-line"; return; }
+    statusEl.textContent = "Loading\u2026";
+    getWeek(weekOf).then(function(week){
+      const key = employeeKey(name);
+      if (week && week.entries && week.entries[key]) {
+        populate(week.entries[key]);
+        statusEl.textContent = "Loaded your existing entry for the week of " + weekOf + ".";
+        statusEl.className = "status-line ok";
+      } else {
+        statusEl.textContent = "No entry yet for " + name + " for the week of " + weekOf + " \u2014 starting fresh.";
+        statusEl.className = "status-line";
+      }
+    }).catch(function(err){
+      statusEl.textContent = "Couldn't reach the shared report (" + err.message + "). Check assets/firebase-config.js.";
+      statusEl.className = "status-line";
+    });
+  });
+
+  document.getElementById("submitBtn").addEventListener("click", function(){
+    const name = currentEmployee();
+    const weekOf = document.getElementById("weekOf").value;
+    const statusEl = document.getElementById("saveStatus");
+    if (!name){ statusEl.textContent = "Select your name first."; statusEl.className = "status-line"; return; }
+    const data = collect();
+    statusEl.textContent = "Submitting\u2026";
+    statusEl.className = "status-line";
+    submitEntry(weekOf, employeeKey(name), data).then(function(){
+      statusEl.textContent = "Submitted. Your entry is now part of the shared report for the week of " + weekOf + ".";
+      statusEl.className = "status-line ok";
+    }).catch(function(err){
+      statusEl.textContent = "Couldn't submit (" + err.message + "). Try \u201cDownload a local backup copy\u201d and send it to Tessa directly.";
+      statusEl.className = "status-line";
+    });
+  });
+
+  document.getElementById("downloadBtn").addEventListener("click", function(){
+    const name = currentEmployee();
+    const weekOf = document.getElementById("weekOf").value;
+    const statusEl = document.getElementById("saveStatus");
+    if (!name){ statusEl.textContent = "Select your name first."; statusEl.className = "status-line"; return; }
+    const data = collect();
+    data.weekOf = weekOf;
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = employeeKey(name) + "-" + weekOf + ".json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    statusEl.textContent = "Downloaded a local backup copy.";
+    statusEl.className = "status-line ok";
+  });
+</script>
+</body>
+</html>

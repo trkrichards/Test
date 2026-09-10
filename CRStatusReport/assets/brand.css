@@ -1,0 +1,228 @@
+@font-face {
+  font-family: "Tiempos Text";
+  src: url("fonts/tiempos-text-regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Tiempos Text";
+  src: url("fonts/tiempos-text-regular-italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "National 2";
+  src: url("fonts/national-2-regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "National 2";
+  src: url("fonts/national-2-bold.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "National 2";
+  src: url("fonts/national-2-regular-italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "National 2";
+  src: url("fonts/national-2-bold-italic.woff2") format("woff2");
+  font-weight: 700; font-style: italic; font-display: swap;
+}
+
+:root{
+  --graphite:#1E1E1E;
+  --ink:#544946;
+  --orange:#FF551D;
+  --sand:#EEE7D7;
+  --paper:#F7F4EF;
+  --ivory:#E0DFDB;
+  --white:#FFFFFF;
+  --green:#2E7D32;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--graphite);
+  font-family:"National 2", Arial, sans-serif;
+  font-size:16px;
+  line-height:1.5;
+}
+.wrap{
+  max-width:860px;
+  margin:0 auto;
+  padding:40px 24px 80px;
+}
+.masthead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+.masthead img{height:26px;}
+.masthead nav a{
+  color:var(--ink);
+  text-decoration:none;
+  font-size:14px;
+  margin-left:18px;
+  border-bottom:1px solid transparent;
+}
+.masthead nav a:hover{border-bottom-color:var(--orange);}
+h1.title{
+  font-family:"Tiempos Text", Georgia, serif;
+  font-weight:400;
+  font-size:2.1rem;
+  margin:18px 0 4px;
+  color:var(--graphite);
+}
+.subtitle{
+  color:var(--ink);
+  font-style:italic;
+  margin:0 0 18px;
+}
+.hr-orange{
+  border:none;
+  border-bottom:3px solid var(--orange);
+  margin:0 0 28px;
+}
+.section-band{
+  background:var(--graphite);
+  color:var(--white);
+  font-weight:700;
+  font-size:.85rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:8px 14px;
+  margin:34px 0 14px;
+}
+.item{
+  border-bottom:1px solid var(--ivory);
+  padding:0 0 16px;
+  margin:0 0 18px;
+}
+.item h3{
+  font-family:"Tiempos Text", Georgia, serif;
+  font-weight:400;
+  font-size:1.15rem;
+  margin:0 0 6px;
+}
+.item p.body{
+  margin:0;
+}
+.item p.empty{
+  margin:0;
+  font-style:italic;
+  color:var(--ink);
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:0 0 20px;
+}
+th, td{
+  text-align:left;
+  padding:8px 12px;
+  border-bottom:1px solid var(--ivory);
+  font-size:.95rem;
+}
+th{
+  background:var(--graphite);
+  color:var(--white);
+  font-weight:700;
+}
+tr:nth-child(even) td{background:var(--paper);}
+tr:nth-child(odd) td{background:var(--white);}
+.status-signed{color:var(--green); font-weight:700;}
+.status-pending{color:var(--orange); font-weight:700;}
+footer.page-footer{
+  margin-top:50px;
+  padding-top:14px;
+  border-top:1px solid var(--ivory);
+  color:var(--ink);
+  font-size:.8rem;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* ---- form-specific ---- */
+.field{margin:0 0 20px;}
+.field label.hint{
+  display:block;
+  color:var(--ink);
+  font-size:.85rem;
+  font-style:italic;
+  margin:2px 0 8px;
+}
+textarea, input[type=text], input[type=date], select{
+  width:100%;
+  font-family:"National 2", Arial, sans-serif;
+  font-size:1rem;
+  color:var(--graphite);
+  background:var(--white);
+  border:1px solid var(--ivory);
+  border-radius:2px;
+  padding:10px 12px;
+}
+textarea{min-height:84px; resize:vertical;}
+select{max-width:280px;}
+.top-controls{
+  display:flex;
+  gap:16px;
+  align-items:flex-end;
+  flex-wrap:wrap;
+  background:var(--sand);
+  padding:16px;
+  margin-bottom:8px;
+}
+.top-controls .field{margin:0;}
+.btn{
+  display:inline-block;
+  font-family:"National 2", Arial, sans-serif;
+  font-weight:700;
+  font-size:.95rem;
+  color:var(--white);
+  background:var(--graphite);
+  border:none;
+  border-radius:2px;
+  padding:12px 20px;
+  cursor:pointer;
+}
+.btn:hover{background:var(--ink);}
+.btn.secondary{
+  background:var(--white);
+  color:var(--graphite);
+  border:1px solid var(--graphite);
+}
+.btn.secondary:hover{background:var(--paper);}
+.actions{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin:30px 0;
+  flex-wrap:wrap;
+}
+.checkbox-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--sand);
+  padding:14px 16px;
+  margin:26px 0;
+}
+.checkbox-row input{width:18px; height:18px;}
+.note{
+  background:var(--white);
+  border:1px solid var(--ivory);
+  border-left:4px solid var(--orange);
+  padding:14px 16px;
+  font-size:.9rem;
+  color:var(--ink);
+  margin:0 0 28px;
+}
+.status-line{
+  font-size:.9rem;
+  color:var(--ink);
+  margin-top:8px;
+}
+.status-line.ok{color:var(--green);}

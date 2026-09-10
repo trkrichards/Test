@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One-time seed import — Commercial Readiness</title>
+<link rel="stylesheet" href="assets/brand.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <img src="assets/logo-graphite.svg" alt="Elsevier">
+    <nav><a href="index.html">View combined report</a></nav>
+  </div>
+
+  <h1 class="title">One-time seed import</h1>
+  <p class="subtitle">Loads the six files in /data into Firestore for the week of 2026-09-09</p>
+  <hr class="hr-orange">
+
+  <div class="note">
+    Run this once, right after you connect your Firebase project (see
+    README.md). It reads the starter <code>data/*.json</code> files already
+    in this repo and writes each one into Firestore as that employee's entry
+    for the week of <strong>2026-09-09</strong>, so the combined report has
+    real history to show right away. Safe to run more than once &mdash; it
+    just re-submits the same six entries.
+  </div>
+
+  <button class="btn" id="runBtn" type="button">Run one-time import</button>
+  <pre id="log" style="background:var(--white);border:1px solid var(--ivory);padding:14px;margin-top:20px;white-space:pre-wrap;font-size:.85rem;"></pre>
+</div>
+
+<script type="module">
+  import { submitEntry } from "./assets/firebase.js";
+
+  const FILES = ["kelly.json", "barry.json", "tessa.json", "laura.json", "andrew.json", "jan.json"];
+  const logEl = document.getElementById("log");
+  function log(msg){ logEl.textContent += msg + "\n"; }
+
+  document.getElementById("runBtn").addEventListener("click", async function(){
+    logEl.textContent = "";
+    for (const file of FILES) {
+      try {
+        const res = await fetch("data/" + file);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        const weekOf = data.weekOf || "2026-09-09";
+        const key = data.employee.toLowerCase().replace(/[^a-z0-9]+/g, "");
+        await submitEntry(weekOf, key, {
+          employee: data.employee,
+          updates: data.updates,
+          ooo: data.ooo,
+          signedOff: data.signedOff,
+          savedAt: data.savedAt || new Date().toISOString(),
+        });
+        log("\u2713 Imported " + data.employee + " for week of " + weekOf);
+      } catch (err) {
+        log("\u2717 Failed on " + file + ": " + err.message);
+      }
+    }
+    log("\nDone. Open index.html to see the combined report.");
+  });
+</script>
+</body>
+</html>

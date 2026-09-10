@@ -1,0 +1,26 @@
+{
+  "employee": "Andrew",
+  "weekOf": "2026-09-09",
+  "ooo": "None",
+  "signedOff": true,
+  "updates": {
+    "ck-unified-vision": "",
+    "ckn-unified-vision": "",
+    "ck-physician-bau": "",
+    "ck-ai-bau": "Andrew McGuire closed out the Beyond the Page Pendo work with Bill Bernstein on 9/2, confirming the team's decision to use a sentence treatment with beyond italicized at a larger font size and verifying the font is set to Vital Orange. He joined the Pendo troubleshooting session on 9/3 and the Pendo views and metrics session on 9/4 to reconcile inconsistent guide view counts across accounts. Guides are live across the ten titles with unique URL parameters in place, and as of 9/8 the campaign showed 24 total guide views and no prompt click-throughs. On Customer Success On-Demand, John asked him to set up a consult with Dave Solovic on long-term hosting, ownership, and data handling review for the GitHub Pages build, and he scheduled a 9/10 working session with John, Laura, and Claudine Lott.",
+    "cpck-bau": "",
+    "ck-medical-schools-bau": "Andrew McGuire attended the CK for Medical Schools monthly check-in on 9/9. Reading Assistant go-live for CK4MS is targeted for September 15 but may move to September 22 since CK4MS testing is not yet complete. The team confirmed the two Reading Assistants are separate features on the backend and have to be turned off individually.",
+    "ck-test-prep-bau": "",
+    "neoid-lms-ck-student": "",
+    "clh": "Andrew McGuire is on the open Rustici access request with Mike Dwyer and Raj Satre for the xAPI pilot. The use case is loading an xAPI-enabled lesson, assigning it to a user in CLH, and confirming the statements land in the LRS, with SCORM Cloud proposed as an earlier validation step. Jordan followed up on 9/3 asking for a timeframe on evaluating the access criteria, so the request is still pending with Product.",
+    "ck-student-noam-clinical-cases-bau": "",
+    "ck-nursing-bau": "",
+    "patient-pass-pe-products-bau": "",
+    "clinical-elearning-bau": "",
+    "clinicalpath-bau": "",
+    "clinicalpath-provider-reports": "",
+    "pss-bau": "",
+    "elearning-localization": "Andrew McGuire was copied on Jan's updated localization asset status sent to Patricia and Valentina on 9/2. The four CKN AI documents were revised for the product name change to ClinicalKey Nursing AI, the CK AI Implementation Toolkit and Get Started Guide are unchanged, and the CK AI guides will be updated to add a Deep Research option. Patricia returned on 9/3 and asked about a customer-facing guide for IP-based user registration, which Jan confirmed she is not building and referred to John."
+  },
+  "savedAt": "2026-09-09T00:00:00.000Z"
+}

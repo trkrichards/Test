@@ -1,0 +1,26 @@
+{
+  "employee": "Tessa",
+  "weekOf": "2026-09-09",
+  "ooo": "None",
+  "signedOff": true,
+  "updates": {
+    "ck-unified-vision": "",
+    "ckn-unified-vision": "",
+    "ck-physician-bau": "",
+    "ck-ai-bau": "",
+    "cpck-bau": "",
+    "ck-medical-schools-bau": "",
+    "ck-test-prep-bau": "",
+    "neoid-lms-ck-student": "",
+    "clh": "Tessa led this week's Clinical Learning Hub migration activities, running the CLH Migration Tracking review, the CLH Migrations Weekly Team Meeting, and the biweekly migration touchbase with the extended workstream team. She worked through individual client data migrations, including Englewood Health, Crescent City Surgical Centre, and Ellsworth County Medical Center, along with the EPM shutdown for Box Butte General Hospital. She also reviewed the CLH SSO GA release documentation and call recording, and fielded team questions on how skill reassignment works when CLH content is split or deprecated.",
+    "ck-student-noam-clinical-cases-bau": "",
+    "ck-nursing-bau": "",
+    "patient-pass-pe-products-bau": "",
+    "clinical-elearning-bau": "",
+    "clinicalpath-bau": "",
+    "clinicalpath-provider-reports": "",
+    "pss-bau": "",
+    "elearning-localization": ""
+  },
+  "savedAt": "2026-09-09T00:00:00.000Z"
+}

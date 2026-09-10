@@ -1,0 +1,26 @@
+{
+  "employee": "Barry",
+  "weekOf": "2026-09-09",
+  "ooo": "None",
+  "signedOff": true,
+  "updates": {
+    "ck-unified-vision": "",
+    "ckn-unified-vision": "",
+    "ck-physician-bau": "Barry finalized the ClinicalKey account setup for eDelivery documentation and sent Yuvaraj Arumugam the final version. eDelivery separately requested the final version of Barry's CK eDelivery guide update covering Ask AI enablement in CHIEF, which remains outstanding.",
+    "ck-ai-bau": "Barry revised the CK/CKN AI invite-by-link activation email to incorporate CKN AI references and circulated the draft for team review ahead of the CKAIN GA Readiness Touchbase. He restored read access to the CKN AI weekly check-in meeting notes after Natalie Doyle flagged she couldn't view them, and distributed this week's CKN AI executive summary to the working group. The team also continued collecting CK Nursing AI opt-out accounts ahead of general release.",
+    "cpck-bau": "",
+    "ck-medical-schools-bau": "Barry worked through scheduling changes for this week's ClinicalKey for Medical Schools Monthly Check-in Call, including attendee additions, declines, and a tentative response. He also asked Kellie White whether invitation-by-link access would apply to CK for Medical Schools specifically, since he understood it might be limited to Test Prep until CK completes its own transition to NeoID.",
+    "ck-test-prep-bau": "Barry confirmed with Kellie White that invitation-by-link access will extend across CKS products, including Test Prep, once NeoID is in place.",
+    "neoid-lms-ck-student": "Barry forwarded the September 2026 IP-based user registration internal alert to the primary distribution list and added additional contacts as requested. He also set up recurring Shared Services and Customer Training & Development collaboration sessions to review upcoming NeoID and Project Phoenix developments requiring new entitlement instructions or customer-facing assets.",
+    "clh": "",
+    "ck-student-noam-clinical-cases-bau": "",
+    "ck-nursing-bau": "Barry finalized the Care Plan Guides on CKN support notes, which have now been hosted on Highspot. He also worked with eDelivery on the revised CKN entitlement procedure, which replaces the CRM agreement/contract requirement with a task-based process in Salesforce for new access, upgrades, and cancellations.",
+    "patient-pass-pe-products-bau": "Barry accepted the kickoff invitation for the GTM: Patientpass Migration to NeoID meeting, beginning migration planning for Patient Pass to the NeoID identity platform.",
+    "clinical-elearning-bau": "Barry confirmed to John Grooms that there have been no recent eLearning or CKN alerts to feature in the upcoming Customer Success newsletter.",
+    "clinicalpath-bau": "",
+    "clinicalpath-provider-reports": "Barry canceled the recurring Cost, Quality and Referrals Report for ClinicalPath check-in call series, thanking the team for their work successfully bringing the reports to clients.",
+    "pss-bau": "",
+    "elearning-localization": ""
+  },
+  "savedAt": "2026-09-09T00:00:00.000Z"
+}
